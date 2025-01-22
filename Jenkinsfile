@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'jenkins_maven'
+    }
     stages {
         stage('Checkout') {
             steps {
