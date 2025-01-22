@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'jenkins_maven'
     }
+    environment {
+        GIT_PATH = '/usr/bin/git' // 指定 Git 的路径
+    }
     stages {
         stage('Checkout') {
             steps {
