@@ -30,9 +30,23 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // 部署到服务器（示例：复制 JAR 文件到目标服务器）
-                sh 'scp target/sample-spring-1.0-SNAPSHOT.jar user@your-server:/path/to/deploy'
-                sh 'ssh user@your-server "nohup java -jar /path/to/deploy/sample-spring-1.0-SNAPSHOT.jar &"'
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: 'deploy-server',  // 与 Jenkins 中配置的名称一致
+                            transfers: [
+                                sshTransfer(
+                                    sourceFiles: 'target/sample-spring-1.0-SNAPSHOT.jar',  // 要传输的文件
+                                    remoteDirectory: '/path/to/deploy',  // 目标路径
+                                    execCommand: '''
+                                        cd /path/to/deploy
+                                        nohup java -jar sample-spring-1.0-SNAPSHOT.jar > app.log 2>&1 &
+                                    '''  // 运行 JAR 文件
+                                )
+                            ]
+                        )
+                    ]
+                )
             }
         }
     }
