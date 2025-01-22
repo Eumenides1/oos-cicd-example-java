@@ -37,7 +37,7 @@ pipeline {
                             transfers: [
                                 sshTransfer(
                                     sourceFiles: 'target/sample-spring-1.0-SNAPSHOT.jar',  // 要传输的文件
-                                    remoteDirectory: '/opt/app',  // 目标路径
+                                    remoteDirectory: '',  // 目标路径
                                     execCommand: '''
                                         cd /opt/app
                                         nohup java -jar sample-spring-1.0-SNAPSHOT.jar > app.log 2>&1 &
