@@ -39,6 +39,7 @@ pipeline {
                                     sourceFiles: 'target/sample-spring-1.0-SNAPSHOT.jar',  // 要传输的文件
                                     remoteDirectory: '',  // 目标路径
                                     execCommand: '''
+                                        pwd
                                         cd /opt/app/target
                                         nohup java -jar sample-spring-1.0-SNAPSHOT.jar > app.log 2>&1 &
                                     '''  // 运行 JAR 文件
