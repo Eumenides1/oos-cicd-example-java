@@ -1,13 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-        // 定义环境变量
-        JAVA_HOME = '/path/to/java'
-        MAVEN_HOME = '/path/to/maven'
-        PATH = "${MAVEN_HOME}/bin:${JAVA_HOME}/bin:${PATH}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
